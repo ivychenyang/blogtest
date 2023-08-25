@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/blogLogin.css}">
+</head>
+
+<body>
+    <div id="container">
+        <form th:action="@{/user/blog/update}" method="post" enctype="multipart/form-data" >
+            <h2>ブログ編集画面</h2>
+            <table align="center">
+                <p style="text-align:right">
+					<a href="#">投稿記事一覧</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{/user/logout}">ログアウト</a>
+                  
+				</p>
+                <tr>
+                    <td class="biaoti">标题</td>
+                    <td>
+						<input type="text" name="blogTitle" th:value="${blogList.blogTitle}" class="biankuang">
+						<input type="hidden" name="blogId" th:value="${blogList.blogId}" />
+					</td>
+                </tr>
+                <tr>
+					<td>上传图片</td>
+                    <td>
+                     	<img width="200px" height="200px" th:src="@{/img/{items}(items=${blogList.blogImage})}"/>
+						<input type="file" name="image" />
+					</td>
+                </tr>
+                <tr>
+                    <td class="biaoti">分类</td>
+                    <td>
+                        <input type="text" name="category"  th:value="${blogList.category}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bjnr">编辑内容</td>
+                    <td><textarea name="blogDetail" rows="10" cols="80" th:text="${blogList.blogDetail}"></textarea></td>
+                </tr>
+                <tr>
+					<td>日付</td>
+					<td>
+						<input type="date" name="registerDate" th:value="${blogList.registerDate}" />
+					</td>
+				</tr>
+                
+            </table>
+            <input type="submit"    value="保存">
+        </form>
+    </div>
+</body>
+</html>

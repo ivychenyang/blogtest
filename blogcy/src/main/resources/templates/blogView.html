@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" th:href="@{/css/blogView.css}">
+</head>
+
+<body>
+	<div id="container" style="text-align: center;">
+		<form action="" method="post">
+			<table align="center" style="width: 100%">
+				<p style="text-align:right">
+					<a th:href="@{/user/logout}">ログアウト</a>
+				</p>
+				<tr>
+					<th align="right"><button class="button-cell" type="button"
+							onclick="location.href='/user/blog/register'">記事登録</button></th>
+
+				</tr>
+			</table>
+		</form>
+		<div class="blogView">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr th:each="blog:${blogList}">
+					<td>
+						<img width="200px" height="200px" th:src="@{/img/{items}(items=${blog.blogImage})}">
+					</td>
+					<td width="480px">
+						<h3 style="text-align: left;" th:text="${blog.blogTitle}"></h3>
+						<p style="text-align: left;" th:text="${blog.blogDetail}"></p>
+						<div style="text-align: left;">
+							<span th:text="${#temporals.format(blog.registerDate, 'yyyy/MM/dd')}"></span>
+						</div>
+						<form th:action = "@{/user/blog/delete/{items}(items=${blog.blogId})}" method = "get">
+							<!--<input type="hidden" name="blogId" th:value="${blog.blogId}">-->
+						<button class="change">削除</button>
+						</form>
+						<form th:action = "@{/user/blog/edit/{items}(items=${blog.blogId})}" method="get">
+						<button class="back">编辑</button>
+						</form>
+					</td>
+					
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

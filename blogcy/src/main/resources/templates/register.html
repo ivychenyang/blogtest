@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+
+<body style="background-color: beige;">
+	<form th:action="@{/user/register/process}" method="post">
+		<div id="container">
+			<h2 class="title">管理者登録画面</h2>
+			<p class="home">
+				<a href="#">HOME</a>
+			</p>
+			<label for="name">UserName</label>
+			<input type="text" id="name" name="userName" placeholder="nameを入力して下さい" required><br>
+			<label for="email">UserEmail</label>
+			<input type="text" id="email" name="email" placeholder="emailを入力して下さい" required><br>
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" placeholder="Passwordを入力して下さい" required><br>
+			<input type="submit" value="登録" style="background-color: lightyellow;">
+		</div>
+	</form>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+h2{
+    color: blue;
+    text-align: center;
+    padding: 20px;
+}
+#container{
+    border: 2px solid burlywood;
+    width: 800px;
+    margin: 0 auto;
+
+}
+.biankuang{
+    width: 576px; ;
+}
+.biaoti{
+    text-align: right;
+}
+.bjnr{
+    vertical-align: top;
+}
+body{
+	background-image: url(/img/bg.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}

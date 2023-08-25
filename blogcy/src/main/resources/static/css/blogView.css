@@ -1,0 +1,48 @@
+h2{
+    color: blue;
+    text-align: center;
+    background-color: blanchedalmond;
+    padding: 20px;
+}
+#container{
+    border: 0;
+    width: 800px;
+    margin: 0 auto;
+
+}
+.button{
+     background-color: antiquewhite;
+
+     text-align:center;
+}
+.biankuang{
+    width: 300px; 
+    background-color: azure;
+}
+th,td{
+    width: 180px;
+}
+.button-cell{
+    background-color: orange;
+}
+#table{
+    background-color: rgba(246, 250, 215, 0.869);
+    
+}
+body{
+	background-image: url(/img/bg.jpg);
+	background-repeat: repeat-y;
+	background-size: 100%;
+}
+.blogView form{
+	display: inline;
+}
+
+table{
+	border-spacing: 20px;
+}
+
+.blogView form button{
+	width: 85px;
+	background-color: antiquewhite;
+}
