@@ -35,7 +35,7 @@ public class BlogController {
 
 	@Autowired
 	private HttpSession session;
-
+	
 	@GetMapping("/list")
 	public String getBlogListPage(Model model) {
 		UserEntity userList = null;
@@ -106,15 +106,66 @@ public class BlogController {
 		}
 		
 	}
+	
+
+//	
+//	@PostMapping("/update")
+//	public String blogUpdate(@RequestParam String blogTitle,
+//			@RequestParam LocalDate registerDate,
+//			@RequestParam String category,
+//			@RequestParam String blogDetail,
+//			@RequestParam Long blogId,Model model){
+//		UserEntity userList = (UserEntity) session.getAttribute("user");
+//		Long userLd = userList.getUserId();
+//		if(blogService.editBlogPost(blogTitle, registerDate, blogDetail, category, userLd, blogId)) {
+//			return "redirect:/user/blog/list";
+//		}else {
+//			model.addAttribute("registerMessage","更新に失敗しました");
+//			return "blogLogin.html";
+//		}
+//		
+//	}
+//	
+//	//图片更新
+//	@PostMapping("/image/update")
+//	public String blogImgUpdate(
+//			@RequestParam MultipartFile blogImage,
+//			@RequestParam Long blogId,Model model) {
+//		UserEntity userList = (UserEntity) session.getAttribute("user");
+//		Long userId = userList.getUserId();
+//		String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date()) + blogImage.getOriginalFilename();
+//		try {
+//			Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-img/" + fileName));
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		if(blogService.editBlogImage(blogId, fileName, userId)) {
+//			return "blogEdit.html";
+//		}else {
+//			BlogEntity blogList = blogService.getBlogPost(blogId);
+//			model.addAttribute("blogList",blogList);
+//			model.addAttribute("editImageMessage", "更新失敗です");
+//			return "blogView.html";
+//		}
+//
+//	}
+	
 	@PostMapping("/update")
 	public String blogUpdate(@RequestParam String blogTitle,
+			@RequestParam MultipartFile image,
 			@RequestParam LocalDate registerDate,
 			@RequestParam String category,
 			@RequestParam String blogDetail,
 			@RequestParam Long blogId,Model model){
 		UserEntity userList = (UserEntity) session.getAttribute("user");
 		Long userLd = userList.getUserId();
-		if(blogService.editBlogPost(blogTitle, registerDate, blogDetail, category, userLd, blogId)) {
+		String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date()) + image.getOriginalFilename();
+		try {
+			Files.copy(image.getInputStream(), Path.of("src/main/resources/static/img/" + fileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(blogService.editBlogPost(blogTitle, fileName, registerDate, blogDetail, category, userLd, blogId)) {
 			return "redirect:/user/blog/list";
 		}else {
 			model.addAttribute("registerMessage","更新に失敗しました");

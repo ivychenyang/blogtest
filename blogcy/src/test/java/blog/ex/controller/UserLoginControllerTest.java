@@ -25,7 +25,6 @@ import blog.ex.model.entity.UserEntity;
 import blog.ex.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserLoginControllerTest {
@@ -48,14 +47,15 @@ public class UserLoginControllerTest {
 			.andExpect(view().name("login.html"));
 		}
 		//login成功场合
+		//when(userService.loginAccount(eq("a@b.com"), eq("123456"))).thenReturn(userEntity);
 		@Test
 		public void testLogin_Successful() throws Exception{
 			RequestBuilder request = MockMvcRequestBuilders
 					.post("/user/login/process")
-					.param("email", "a@a.com")
+					.param("email", "a@b.com")
 					.param("password","123456");
 			MvcResult result = mockMvc.perform(request)
-					.andExpect(redirectedUrl("user/blog/list")).andReturn();
+					.andExpect(redirectedUrl("/user/blog/list")).andReturn();
 			//register实行结果返回方法
 			//Session的取得
 			HttpSession session = result.getRequest().getSession();
@@ -64,7 +64,7 @@ public class UserLoginControllerTest {
 			UserEntity userList = (UserEntity) session.getAttribute("user");
 			assertNotNull(userList);
 		
-			assertEquals ("a@a.com",userList.getEmail());
+			assertEquals ("a@b.com",userList.getEmail());
 			assertEquals ("123456",userList.getPassword());
 		}
 		//email 不对 失败的例子

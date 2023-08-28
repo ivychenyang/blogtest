@@ -52,7 +52,8 @@ public class BlogService {
 
 	}
 
-	public boolean editBlogPost(String blogTitle, LocalDate registerDate, String blogDetail, String category,
+
+	public boolean editBlogPost(String blogTitle, String image, LocalDate registerDate, String blogDetail, String category,
 			Long userId, Long blogId) {
 		BlogEntity blogList = blogDao.findByBlogId(blogId);
 		if (userId == null) {
@@ -60,6 +61,7 @@ public class BlogService {
 		} else {
 			blogList.setBlogId(blogId);
 			blogList.setBlogTitle(blogTitle);
+			blogList.setBlogImage(image);
 			blogList.setBlogDetail(blogDetail);
 			blogList.setCategory(category);
 			blogList.setRegisterDate(registerDate);

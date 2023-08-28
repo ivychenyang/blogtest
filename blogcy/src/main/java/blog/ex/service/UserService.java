@@ -9,17 +9,15 @@ import blog.ex.model.dao.UserDao;
 import blog.ex.model.entity.UserEntity;
 
 @Service
-
 public class UserService {
 
 @Autowired
 private UserDao userDao;
 
 public boolean createAccount (String userName,String email,String password) {
-	
-	LocalDateTime registerDate = LocalDateTime.now();
 	UserEntity userEntity = userDao.findByEmail(email);
 	if(userEntity==null) {
+		LocalDateTime registerDate = LocalDateTime.now();
 		userDao.save(new UserEntity(userName,email,password,registerDate));
 		return true;
 	}else {
@@ -27,6 +25,7 @@ public boolean createAccount (String userName,String email,String password) {
 	}
 
 }
+
 public UserEntity loginAccount(String email,String password) {
 	
 	UserEntity userEntity = userDao.findByEmailAndPassword(email,password);

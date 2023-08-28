@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,27 +42,26 @@ public class UserControllerTest {
 			mockMvc.perform(request)
 			.andExpect(view().name("register.html"));
 	}
-	
+	//when(userService.createAccount("Alice", "alice1234","123456")).thenReturn(true);
 	//全部输入正确登录
 	@Test
 	public void testRegister_Succeed() throws Exception{
 		RequestBuilder request = MockMvcRequestBuilders
 				.post("/user/register/process")
-				.param("username","111")
-				.param("email","123@123.com")
-				.param("password", "Ana123");
+				.param("userName","Alice")
+				.param("email","alice1234")
+				.param("password", "123456");
 		
 			mockMvc.perform(request)
-			.andExpect(view().name("login.html"))
-			.andExpect(model().attribute("error","true"));
+			.andExpect(redirectedUrl("/user/login")).andReturn();;
 	}
 	
 	//username,password not null,email null
 		@Test
 		public void testRegister_Fail() throws Exception{
 			RequestBuilder request = MockMvcRequestBuilders
-					.post("/register/process")
-					.param("username","Alice")
+					.post("/user/register/process")
+					.param("userName","Alice")
 					.param("email","123@123.com")
 					.param("password", "123");
 			
@@ -73,8 +73,8 @@ public class UserControllerTest {
 	@Test
 	public void testRegister_emailFail() throws Exception{
 		RequestBuilder request = MockMvcRequestBuilders
-				.post("/user/register")
-				.param("username","Alice")
+				.post("/user/register/process")
+				.param("userName","Alice")
 				.param("email","")
 				.param("password", "123");
 		
@@ -85,8 +85,8 @@ public class UserControllerTest {
 			@Test
 			public void testRegister_usernameFail() throws Exception{
 				RequestBuilder request = MockMvcRequestBuilders
-						.post("/user/register")
-						.param("username","Alice")
+						.post("/user/register/process")
+						.param("userName","Alice")
 						.param("email","123@123.com")
 						.param("password", "");
 				
